@@ -13,7 +13,6 @@ export const menuSlotRecipe = defineSlotRecipe({
       zIndex: "dropdown",
       borderRadius: "md",
       overflow: "hidden",
-      colorPalette: "accent",
       _open: {
         animationStyle: "slide-fade-in",
         animationDuration: "fast",
@@ -29,6 +28,7 @@ export const menuSlotRecipe = defineSlotRecipe({
       userSelect: "none",
       width: "100%",
       display: "flex",
+      cursor: "menuitem",
       alignItems: "center",
       textAlign: "start",
       position: "relative",
@@ -73,7 +73,7 @@ export const menuSlotRecipe = defineSlotRecipe({
       subtle: {
         item: {
           _highlighted: {
-            bg: { base: "bg.subtle", _dark: "bg.emphasized" },
+            bg: { _light: "bg.subtle", _dark: "bg.emphasized" },
           },
         },
       },
@@ -120,6 +120,5 @@ export const menuSlotRecipe = defineSlotRecipe({
   defaultVariants: {
     size: "md",
     variant: "subtle",
-    colorPalette: "accent",
   },
 })

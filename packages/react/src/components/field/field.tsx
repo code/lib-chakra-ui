@@ -1,7 +1,7 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Field as ArkField, useFieldContext } from "@ark-ui/react/field"
-import { type Assign, cx } from "@chakra-ui/utils"
 import { forwardRef } from "react"
 import {
   type HTMLChakraProps,
@@ -10,6 +10,7 @@ import {
   chakra,
   createSlotRecipeContext,
 } from "../../styled-system"
+import { cx } from "../../utils"
 import { createIcon } from "../icon"
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +40,9 @@ export const FieldRoot = withProvider<HTMLDivElement, FieldRootProps>(
   { forwardAsChild: true },
 )
 
-export const FieldRootPropsProvider =
+////////////////////////////////////////////////////////////////////////////////////
+
+export const FieldPropsProvider =
   PropsProvider as React.Provider<FieldRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -96,6 +99,7 @@ export const FieldRequiredIndicator = forwardRef<
 
   const field = useFieldContext()
   const classNames = useClassNames()
+  const styles = useFieldStyles()
 
   if (!field?.required) {
     return fallback
@@ -107,6 +111,7 @@ export const FieldRequiredIndicator = forwardRef<
       aria-hidden="true"
       {...restProps}
       className={cx(classNames.requiredIndicator, props.className)}
+      css={[styles.requiredIndicator, props.css]}
     >
       {children}
     </chakra.span>

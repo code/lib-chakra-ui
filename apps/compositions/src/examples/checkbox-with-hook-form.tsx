@@ -1,3 +1,5 @@
+"use client"
+
 import { Button, CheckboxGroup, Code, Fieldset } from "@chakra-ui/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Checkbox } from "compositions/ui/checkbox"
@@ -41,17 +43,18 @@ export const CheckboxWithHookForm = () => {
       <Fieldset.Root invalid={invalid}>
         <Fieldset.Legend>Select your framework</Fieldset.Legend>
         <CheckboxGroup
+          invalid={invalid}
           value={framework.field.value}
           onValueChange={framework.field.onChange}
           name={framework.field.name}
         >
-          <Fieldset.Control>
+          <Fieldset.Content>
             {items.map((item) => (
-              <Checkbox key={item.value} invalid={invalid} value={item.value}>
+              <Checkbox key={item.value} value={item.value}>
                 {item.label}
               </Checkbox>
             ))}
-          </Fieldset.Control>
+          </Fieldset.Content>
         </CheckboxGroup>
 
         {errors.framework && (

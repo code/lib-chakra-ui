@@ -1,12 +1,7 @@
 "use client"
 
-import {
-  AvatarRootPropsProvider,
-  Avatar as ChakraAvatar,
-  Group,
-  type GroupProps,
-  type SlotRecipeProps,
-} from "@chakra-ui/react"
+import type { GroupProps, SlotRecipeProps } from "@chakra-ui/react"
+import { Avatar as ChakraAvatar, Group } from "@chakra-ui/react"
 import { forwardRef } from "react"
 
 type ImageProps = React.ImgHTMLAttributes<HTMLImageElement>
@@ -58,7 +53,7 @@ const AvatarFallback = forwardRef<HTMLDivElement, AvatarFallbackProps>(
 
 function getInitials(name: string) {
   const names = name.trim().split(" ")
-  const firstName = names[0] ?? ""
+  const firstName = names[0] != null ? names[0] : ""
   const lastName = names.length > 1 ? names[names.length - 1] : ""
   return firstName && lastName
     ? `${firstName.charAt(0)}${lastName.charAt(0)}`
@@ -71,9 +66,9 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
   function AvatarGroup(props, ref) {
     const { size, variant, borderless, ...rest } = props
     return (
-      <AvatarRootPropsProvider value={{ size, variant, borderless }}>
+      <ChakraAvatar.PropsProvider value={{ size, variant, borderless }}>
         <Group gap="0" spaceX="-3" ref={ref} {...rest} />
-      </AvatarRootPropsProvider>
+      </ChakraAvatar.PropsProvider>
     )
   },
 )

@@ -9,6 +9,7 @@ export const inputRecipe = defineRecipe({
     position: "relative",
     appearance: "none",
     colorPalette: "gray",
+    textAlign: "start",
     _disabled: {
       layerStyle: "disabled",
     },
@@ -68,14 +69,13 @@ export const inputRecipe = defineRecipe({
         borderWidth: "1px",
         borderColor: "transparent",
         bg: "bg.subtle",
+        focusVisibleRing: "inside",
+        _focusVisible: {
+          bg: "bg",
+        },
         _invalid: {
           focusRingColor: "var(--error-color)",
           borderColor: "var(--error-color)",
-        },
-        _focusVisible: {
-          bg: "bg",
-          outline: "1px solid var(--focus-color)",
-          borderColor: "var(--focus-color)",
         },
       },
       flushed: {
@@ -84,13 +84,13 @@ export const inputRecipe = defineRecipe({
         borderRadius: "0",
         px: "0",
         bg: "bg",
-        _invalid: {
-          focusRingColor: "var(--error-color)",
-          borderColor: "var(--error-color)",
-        },
         _focusVisible: {
           borderColor: "var(--focus-color)",
           boxShadow: "0px 1px 0px 0px var(--focus-color)",
+        },
+        _invalid: {
+          focusRingColor: "var(--error-color)",
+          borderColor: "var(--error-color)",
         },
       },
     },

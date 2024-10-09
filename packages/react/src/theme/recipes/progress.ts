@@ -6,7 +6,6 @@ export const progressSlotRecipe = defineSlotRecipe({
   className: "chakra-progress",
   base: {
     root: {
-      colorPalette: "accent",
       textStyle: "sm",
       position: "relative",
     },
@@ -85,7 +84,7 @@ export const progressSlotRecipe = defineSlotRecipe({
           backgroundSize: `var(--stripe-size) var(--stripe-size)`,
           "--stripe-size": "1rem",
           "--stripe-color": {
-            base: "rgba(255, 255, 255, 0.3)",
+            _light: "rgba(255, 255, 255, 0.3)",
             _dark: "rgba(0, 0, 0, 0.3)",
           },
         },
@@ -121,6 +120,5 @@ export const progressSlotRecipe = defineSlotRecipe({
     variant: "outline",
     size: "md",
     shape: "rounded",
-    colorPalette: "accent",
   },
 })

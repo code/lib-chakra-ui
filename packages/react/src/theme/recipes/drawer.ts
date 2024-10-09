@@ -1,13 +1,12 @@
 import { drawerAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
-import { dialogSlotRecipe } from "./dialog"
 
 export const drawerSlotRecipe = defineSlotRecipe({
   slots: drawerAnatomy.keys(),
   className: "chakra-drawer",
   base: {
     backdrop: {
-      bg: "blackAlpha.500",
+      bg: "blackAlpha.700",
       pos: "fixed",
       insetInlineStart: 0,
       top: 0,
@@ -54,15 +53,27 @@ export const drawerSlotRecipe = defineSlotRecipe({
         animationTimingFunction: "ease-in-smooth",
       },
     },
-    header: dialogSlotRecipe.base!.header,
-    closeTrigger: dialogSlotRecipe.base!.closeTrigger,
+    header: {
+      flex: 0,
+      paddingX: "6",
+      paddingTop: "6",
+      paddingBottom: "4",
+    },
     body: {
       px: "6",
       py: "2",
       flex: "1",
       overflow: "auto",
     },
-    footer: dialogSlotRecipe.base!.footer,
+    footer: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      gap: "3",
+      paddingX: "6",
+      paddingTop: "2",
+      paddingBottom: "4",
+    },
   },
 
   variants: {

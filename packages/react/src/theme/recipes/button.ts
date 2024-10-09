@@ -11,6 +11,7 @@ export const buttonRecipe = defineRecipe({
     position: "relative",
     whiteSpace: "nowrap",
     verticalAlign: "middle",
+    cursor: "button",
     flexShrink: "0",
     outline: "0",
     lineHeight: "1.2",
@@ -18,7 +19,6 @@ export const buttonRecipe = defineRecipe({
     fontWeight: "medium",
     transitionProperty: "common",
     transitionDuration: "moderate",
-    colorPalette: "accent",
     focusVisibleRing: "outside",
     _disabled: {
       layerStyle: "disabled",
@@ -92,7 +92,7 @@ export const buttonRecipe = defineRecipe({
         bg: "colorPalette.muted",
         color: "colorPalette.fg",
         shadow: "inset 0 0 0px 1px var(--shadow-color)",
-        shadowColor: "colorPalette.subtle",
+        shadowColor: "colorPalette.emphasized",
         _hover: {
           bg: "colorPalette.subtle",
         },
@@ -123,13 +123,14 @@ export const buttonRecipe = defineRecipe({
         },
       },
 
-      plain: {},
+      plain: {
+        color: "colorPalette.fg",
+      },
     },
   },
 
   defaultVariants: {
     size: "md",
     variant: "solid",
-    colorPalette: "accent",
   },
 })

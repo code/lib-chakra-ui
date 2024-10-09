@@ -12,7 +12,7 @@ export const sliderSlotRecipe = defineSlotRecipe({
       fontSize: "sm",
       position: "relative",
       isolation: "isolate",
-      colorPalette: "accent",
+      touchAction: "none",
     },
     control: {
       display: "inline-flex",
@@ -181,6 +181,5 @@ export const sliderSlotRecipe = defineSlotRecipe({
     size: "md",
     variant: "outline",
     orientation: "horizontal",
-    colorPalette: "accent",
   },
 })

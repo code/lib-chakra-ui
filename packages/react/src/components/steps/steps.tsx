@@ -1,10 +1,7 @@
 "use client"
 
-import {
-  Steps as ArkSteps,
-  StepsItemContext as ArkStepsItemContext,
-} from "@ark-ui/react/steps"
-import type { Assign } from "@chakra-ui/utils"
+import type { Assign } from "@ark-ui/react"
+import { Steps as ArkSteps } from "@ark-ui/react/steps"
 import { forwardRef } from "react"
 import {
   type HTMLChakraProps,
@@ -28,6 +25,20 @@ export { useStepsStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+export interface StepsRootProviderBaseProps
+  extends Assign<ArkSteps.RootProviderBaseProps, SlotRecipeProps<"steps">>,
+    UnstyledProp {}
+
+export interface StepsRootProviderProps
+  extends HTMLChakraProps<"div", StepsRootProviderBaseProps> {}
+
+export const StepsRootProvider = withProvider<
+  HTMLDivElement,
+  StepsRootProviderProps
+>(ArkSteps.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
 export interface StepsRootBaseProps
   extends Assign<ArkSteps.RootBaseProps, SlotRecipeProps<"steps">>,
     UnstyledProp {}
@@ -41,7 +52,9 @@ export const StepsRoot = withProvider<HTMLDivElement, StepsRootProps>(
   { forwardAsChild: true },
 )
 
-export const StepsRootPropsProvider =
+////////////////////////////////////////////////////////////////////////////////////
+
+export const StepsPropsProvider =
   PropsProvider as React.Provider<StepsRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -102,13 +115,13 @@ export interface StepsNumberProps extends HTMLChakraProps<"div"> {}
 export const StepsNumber = forwardRef<HTMLDivElement, StepsNumberProps>(
   function StepsNumber(props, ref) {
     return (
-      <ArkStepsItemContext>
+      <ArkSteps.ItemContext>
         {(api) => (
           <chakra.div ref={ref} {...props}>
             {api.index + 1}
           </chakra.div>
         )}
-      </ArkStepsItemContext>
+      </ArkSteps.ItemContext>
     )
   },
 )
@@ -152,13 +165,13 @@ export interface StepsStatusProps {
 
 export const StepsStatus = (props: StepsStatusProps) => {
   return (
-    <ArkStepsItemContext>
+    <ArkSteps.ItemContext>
       {(api) => {
         if (api.current) return <>{props.current ?? props.incomplete}</>
         if (api.completed) return <>{props.complete}</>
         return <>{props.incomplete ?? props.current}</>
       }}
-    </ArkStepsItemContext>
+    </ArkSteps.ItemContext>
   )
 }
 
@@ -199,3 +212,10 @@ export const StepsPrevTrigger = withContext<
   HTMLButtonElement,
   StepsPrevTriggerProps
 >(ArkSteps.PrevTrigger, "prevTrigger", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const StepsContext = ArkSteps.Context
+export const StepsItemContext = ArkSteps.ItemContext
+
+export interface StepsChangeDetails extends ArkSteps.ChangeDetails {}

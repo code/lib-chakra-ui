@@ -6,17 +6,13 @@ export const radioGroupSlotRecipe = defineSlotRecipe({
   className: "chakra-radio-group",
   slots: radioGroupAnatomy.keys(),
   base: {
-    root: {
-      colorPalette: "accent",
-    },
-
     item: {
       display: "inline-flex",
       alignItems: "center",
       verticalAlign: "top",
       position: "relative",
       _disabled: {
-        cursor: "not-allowed",
+        cursor: "disabled",
       },
     },
 
@@ -89,6 +85,5 @@ export const radioGroupSlotRecipe = defineSlotRecipe({
   defaultVariants: {
     size: "md",
     variant: "outline",
-    colorPalette: "accent",
   },
 })

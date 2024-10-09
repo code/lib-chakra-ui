@@ -8,7 +8,6 @@ export const badgeRecipe = defineRecipe({
     gap: "1",
     fontWeight: "medium",
     fontVariantNumeric: "tabular-nums",
-    colorPalette: "accent",
     whiteSpace: "nowrap",
     verticalAlign: "middle",
   },
@@ -34,7 +33,7 @@ export const badgeRecipe = defineRecipe({
         shadowColor: "colorPalette.subtle",
       },
       plain: {
-        color: "colorPalette.contrast",
+        color: "colorPalette.fg",
       },
     },
     size: {
@@ -42,40 +41,30 @@ export const badgeRecipe = defineRecipe({
         textStyle: "2xs",
         borderRadius: "xs",
         px: "1",
-        _empty: {
-          height: "1",
-        },
+        py: "1px",
       },
       sm: {
         textStyle: "xs",
         borderRadius: "sm",
         px: "1.5",
-        _empty: {
-          height: "2",
-        },
+        py: "1px",
       },
       md: {
         textStyle: "sm",
         borderRadius: "sm",
         px: "2",
-        _empty: {
-          height: "4",
-        },
+        py: "1px",
       },
       lg: {
         textStyle: "sm",
         borderRadius: "sm",
-        px: "2",
-        py: "0.5",
-        _empty: {
-          height: "4",
-        },
+        px: "2.5",
+        py: "1",
       },
     },
   },
   defaultVariants: {
     variant: "subtle",
     size: "sm",
-    colorPalette: "gray",
   },
 })

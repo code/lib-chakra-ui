@@ -1,7 +1,7 @@
 "use client"
 
 import { data } from "@/lib/search"
-import { Combobox } from "@ark-ui/react"
+import { Combobox, createListCollection } from "@ark-ui/react"
 import { useEnvironmentContext } from "@ark-ui/react/environment"
 import {
   Center,
@@ -32,7 +32,12 @@ const ComboboxContent = chakra(Combobox.Content, {
 })
 const ComboboxList = chakra(Combobox.List)
 const ComboboxItemGroup = chakra(Combobox.ItemGroup)
-const ComboboxItemGroupLabel = chakra(Combobox.ItemGroupLabel)
+const ComboboxItemGroupLabel = chakra(Combobox.ItemGroupLabel, {
+  base: {
+    px: "4",
+    py: "3",
+  },
+})
 const ComboboxItem = chakra(Combobox.Item, {
   base: {
     borderRadius: "md",
@@ -64,12 +69,21 @@ export const CommandMenu = (props: Props) => {
   const { matchEntries, filteredItems } = useFilteredItems(data, inputValue)
   const router = useRouter()
 
+  const collection = useMemo(() => {
+    return createListCollection({ items: filteredItems })
+  }, [filteredItems])
+
   useHotkey(setOpen, { disable: props.disableHotkey })
 
   return (
-    <DialogRoot open={open} onOpenChange={(event) => setOpen(event.open)}>
+    <DialogRoot
+      centered
+      motionPreset="slide-in-bottom"
+      open={open}
+      onOpenChange={(event) => setOpen(event.open)}
+    >
       <DialogTrigger asChild>{props.trigger}</DialogTrigger>
-      <DialogContent p="2" width={{ base: "100%", sm: "md" }}>
+      <DialogContent p="2" width={{ base: "100%", sm: "lg" }}>
         <ComboboxRoot
           open
           disableLayer
@@ -77,7 +91,7 @@ export const CommandMenu = (props: Props) => {
           placeholder="Search the docs"
           selectionBehavior="clear"
           loopFocus={false}
-          items={filteredItems}
+          collection={collection}
           onValueChange={(e) => {
             setOpen(false)
             router.push(`/${e.value}`)
@@ -94,26 +108,19 @@ export const CommandMenu = (props: Props) => {
             px="0"
             py="0"
             overflow="auto"
-            maxH="68vh"
+            maxH="50vh"
             overscrollBehavior="contain"
           >
             <ComboboxList>
               {matchEntries.length === 0 && (
                 <Center p="3" minH="40">
-                  <Text color="fg.muted" textStyle="sm">
+                  <Text color="fg.subtle" textStyle="sm">
                     No results found for <Text as="strong">{inputValue}</Text>
                   </Text>
                 </Center>
               )}
               {matchEntries.map(([key, items]) => (
                 <ComboboxItemGroup key={key}>
-                  <ComboboxItemGroupLabel
-                    textTransform="capitalize"
-                    color="fg.muted"
-                    fontWeight="medium"
-                  >
-                    {key}
-                  </ComboboxItemGroupLabel>
                   {items.map((item) => (
                     <ComboboxItem
                       key={item.value}
@@ -124,22 +131,8 @@ export const CommandMenu = (props: Props) => {
                       py="3"
                     >
                       <Stack gap="0">
+                        <Text color="teal.fg">{item.category}</Text>
                         <Text fontWeight="medium">{item.label}</Text>
-                        <Text
-                          textStyle="sm"
-                          fontWeight="medium"
-                          color="teal.600"
-                        >
-                          {item.category}
-                        </Text>
-                        <Text
-                          textStyle="sm"
-                          color="fg.muted"
-                          mt="0.5"
-                          lineClamp={2}
-                        >
-                          {item.description}
-                        </Text>
                       </Stack>
                     </ComboboxItem>
                   ))}
@@ -158,12 +151,15 @@ const useFilteredItems = (data: Record<string, Item[]>, inputValue: string) => {
 
   const filter = useCallback(
     (value: string): Record<string, Item[]> => {
-      if (!value) return data
+      if (!value)
+        return Object.fromEntries(
+          Object.entries(data).map(([key, value]) => [key, value.slice(0, 4)]),
+        )
 
       const results = matchSorter(items, value, {
         keys: ["label", "description"],
       })
-      return results.length ? { "Search Results:": results } : {}
+      return results.length ? { "Search Results": results.slice(0, 8) } : {}
     },
     [items, data],
   )

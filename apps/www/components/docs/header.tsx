@@ -5,6 +5,7 @@ import { Logo } from "@/components/logo"
 import { MobileSearchButton, SearchButton } from "@/components/search-button"
 import { SocialLinks } from "@/components/social-links"
 import { VersionMenu } from "@/components/version-menu"
+import { docsConfig } from "@/docs.config"
 import { useRoute } from "@/lib/use-route"
 import {
   Box,
@@ -29,6 +30,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai"
+import { SponsorButton } from "../sponsor-button"
 import { CommandMenu } from "./command-menu"
 
 const HeaderRoot = chakra("header", {
@@ -142,16 +144,16 @@ interface HeaderVersionMenuProps {
 const HeaderVersionMenu = ({ containerRef }: HeaderVersionMenuProps) => (
   <VersionMenu
     items={[
-      { title: "v3", value: "3.1.0", url: "/v3" },
-      { title: "v2", value: "2.8.x", url: "/v2" },
-      { title: "v1", value: "1.5.x", url: "/v1" },
+      { title: "v3", value: "3.0.0", url: "#" },
+      { title: "v2", value: "2.8.x", url: "https://v2.chakra-ui.com" },
+      { title: "v1", value: "1.5.x", url: "https://v1.chakra-ui.com" },
     ]}
-    containerRef={containerRef}
+    portalRef={containerRef}
   />
 )
 
 const HeaderSocialLinks = () => (
-  <SocialLinks items={[{ type: "github", href: "#" }]} />
+  <SocialLinks items={[{ type: "github", href: docsConfig.repoUrl }]} />
 )
 
 const HeaderMobileMenuDropdown = () => {
@@ -237,6 +239,7 @@ const HeaderMobileMenuDropdown = () => {
 const HeaderDesktopActions = () => {
   return (
     <HStack gap="2" minH="48px" flexShrink="1" minW="0">
+      <SponsorButton hideBelow="lg" />
       <HeaderVersionMenu />
       <CommandMenu
         trigger={<SearchButton width="256px" size="sm" flexShrink="1" />}

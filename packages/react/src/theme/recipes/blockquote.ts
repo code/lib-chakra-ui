@@ -10,11 +10,10 @@ export const blockquoteSlotRecipe = defineSlotRecipe({
       display: "flex",
       flexDirection: "column",
       gap: "2",
-      colorPalette: "accent",
     },
     caption: {
       textStyle: "sm",
-      color: "fg.muted",
+      color: "fg.subtle",
     },
     icon: {
       textStyle: "xl",
@@ -72,6 +71,5 @@ export const blockquoteSlotRecipe = defineSlotRecipe({
   defaultVariants: {
     variant: "subtle",
     justify: "start",
-    colorPalette: "accent",
   },
 })
